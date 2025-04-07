@@ -4,6 +4,8 @@
  */
 package com.mycompany.jdbc;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author juanc
@@ -38,6 +40,13 @@ public class CAlumnos {
         this.apellidoAlumno = apellidoAlumno;
     }
     
-    
+    public void InsertarAlumno(JTextField paramNombres, JTextField paramApellidos){
+        
+        setNombreAlumnos(paramNombres.getText());
+        setApellidoAlumno(paramApellidos.getText());
+        
+        CConexion objetoConexion = new CConexion();
+        
+    }
     
 }
