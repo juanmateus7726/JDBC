@@ -4,6 +4,9 @@
  */
 package com.mycompany.jdbc;
 
+import java.sql.CallableStatement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -47,6 +50,26 @@ public class CAlumnos {
         
         CConexion objetoConexion = new CConexion();
         
+        String consulta = "insert into Alumnos (nombres, apellidos) values (?,?);";
+        
+        try {
+            
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+            cs.setString(1, getNombreAlumnos());
+            cs.setString(2, getApellidoAlumno());
+            
+            cs.execute();
+            
+            JOptionPane.showMessageDialog(null, "Se inserto correctamente el alumno");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se inserto correctamente el alumno, Error:" + e.toString());
+        }
+        
+    }
+
+    void MostrarAlumno(JTable tbtablaalumnos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

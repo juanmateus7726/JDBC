@@ -76,6 +76,11 @@ public class FormsAlumnos extends javax.swing.JFrame {
         });
 
         btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardarActionPerformed(evt);
+            }
+        });
 
         btnmodificar.setText("Modificar");
         btnmodificar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,8 +90,18 @@ public class FormsAlumnos extends javax.swing.JFrame {
         });
 
         btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
+            }
+        });
 
         btnlimpiar.setText("Limpiar");
+        btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -209,6 +224,23 @@ public class FormsAlumnos extends javax.swing.JFrame {
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnmodificarActionPerformed
+
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        // TODO add your handling code here:
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.InsertarAlumno(txtnombres, txtapellidos);
+        objetoAlumnos.MostrarAlumno(tbtablaalumnos);
+        
+    }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnlimpiarActionPerformed
 
     /**
      * @param args the command line arguments
