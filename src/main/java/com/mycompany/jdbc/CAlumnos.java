@@ -5,9 +5,14 @@
 package com.mycompany.jdbc;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -67,9 +72,50 @@ public class CAlumnos {
         }
         
     }
-
-    void MostrarAlumno(JTable tbtablaalumnos) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public void MostrarAlumno(JTable paramtbtablaalumnos) {
+        
+        CConexion objetoConexion = new CConexion();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        TableRowSorter<TableModel>OrdenarTabla = new TableRowSorter<TableModel>(modelo);
+        paramtbtablaalumnos.setRowSorter(OrdenarTabla);
+        
+        String sql="";
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        
+        paramtbtablaalumnos.setModel(modelo);
+        
+        sql="select * From Alumnos";
+        
+        String[]datos = new String [3];
+        
+        Statement st;
+        
+        try {
+            
+            st = objetoConexion.establecerConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()){
+                datos[0]=rs.getString(1);
+                datos[1]=rs.getString(2);
+                datos[2]=rs.getString(3);
+                
+                modelo.addRow(datos);
+                
+            }
+            paramtbtablaalumnos.setModel(modelo);
+            
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros: Error:" +e.toString());
+            
+        }
+        
     }
     
 }
