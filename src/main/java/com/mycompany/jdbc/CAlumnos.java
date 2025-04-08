@@ -118,4 +118,80 @@ public class CAlumnos {
         
     }
     
+    public void SeleccionarAlumno(JTable paramtbtablaalumnos, JTextField paramID, JTextField paramNombres, JTextField paramApellidos) {
+        
+        try {
+            
+            int fila = paramtbtablaalumnos.getSelectedRow();
+            
+            if (fila>=0) {
+                paramID.setText((String) (paramtbtablaalumnos.getValueAt(fila, 0)));
+                paramNombres.setText((String) (paramtbtablaalumnos.getValueAt(fila, 1)));
+                paramApellidos.setText((String) (paramtbtablaalumnos.getValueAt(fila, 2)));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.toString());
+        }
+        
+    }
+    
+    public void ModificarAlumnos(JTextField paramCodigo, JTextField paramNombres, JTextField paramApellidos) {
+        
+        setCodigo(Integer.parseInt(paramCodigo.getText()));
+        setNombreAlumnos(paramNombres.getText());
+        setApellidoAlumno(paramApellidos.getText());
+        
+        CConexion objetoConexion = new CConexion();
+        
+        String consulta = "UPDATE Alumnos SET alumnos.nombres =?, alumnos.apellidos=? WHERE alumnos.id=?;";
+        
+        try {
+            
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+            cs.setString(1, getNombreAlumnos());
+            cs.setString(2, getApellidoAlumno());
+            cs.setInt(3, getCodigo());
+            
+            cs.execute();
+            
+            JOptionPane.showMessageDialog(null, "Modificacion exitosa");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al modificar alumno, error: " +e.toString());
+        }
+        
+    }
+    
+    public void EliminarAlumnos(JTextField paramCodigo) {
+                
+                setCodigo(Integer.parseInt(paramCodigo.getText()));
+                
+                CAlumnos objetoAlumnos = new CAlumnos();
+                
+                CConexion objetoConexion = new CConexion();
+                
+                String consulta = "DELETE FROM Alumnos WHERE alumnos.id = ?;";
+                
+                try {
+                    
+                    CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+                    
+                    cs.setInt(1, getCodigo());
+                    
+                    cs.execute();
+                    
+                    JOptionPane.showMessageDialog(null, "Se elimino correctamente el alumno.");
+                    
+                } catch (Exception e) {
+                    
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar, Error:" +e.toString());
+
+            }
+            
+        }
+    
 }

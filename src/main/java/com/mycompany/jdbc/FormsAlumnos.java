@@ -15,6 +15,8 @@ public class FormsAlumnos extends javax.swing.JFrame {
      */
     public FormsAlumnos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        txtid.setEnabled(false);
         
         CConexion objetoConexion = new CConexion();
         objetoConexion.establecerConexion();
@@ -174,6 +176,11 @@ public class FormsAlumnos extends javax.swing.JFrame {
 
             }
         ));
+        tbtablaalumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbtablaalumnosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbtablaalumnos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -223,6 +230,11 @@ public class FormsAlumnos extends javax.swing.JFrame {
 
     private void btnmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarActionPerformed
         // TODO add your handling code here:
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.ModificarAlumnos(txtid, txtnombres, txtapellidos);
+        objetoAlumnos.MostrarAlumno(tbtablaalumnos);
+        
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
@@ -236,11 +248,25 @@ public class FormsAlumnos extends javax.swing.JFrame {
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.EliminarAlumnos(txtid);
+        objetoAlumnos.MostrarAlumno(tbtablaalumnos);
+        
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnlimpiarActionPerformed
+
+    private void tbtablaalumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbtablaalumnosMouseClicked
+        // TODO add your handling code here:
+        
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.SeleccionarAlumno(tbtablaalumnos, txtid, txtnombres, txtapellidos);
+        objetoAlumnos.MostrarAlumno(tbtablaalumnos);
+        
+    }//GEN-LAST:event_tbtablaalumnosMouseClicked
 
     /**
      * @param args the command line arguments
